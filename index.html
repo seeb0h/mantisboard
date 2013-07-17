@@ -2,7 +2,7 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="css/jquery.gridster.min.css">
-  <link rel="stylesheet" type="text/css" href="css/statusboard.css?0010">
+  <link rel="stylesheet" type="text/css" href="css/statusboard.css?0011">
   <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -21,6 +21,15 @@
 </head>
 <body>
 
+<!-- Mask to cover the whole screen -->
+<div id="mask"></div>
+
+
+<!-- Loading modal dialog -->
+<div id="loading" class="window">
+  Loading data 
+  <br/>Please wait
+</div>
 
 <div class="gridster" id="grid">
   <ul id="gridUL">
@@ -35,12 +44,90 @@
 
 <script type="text/javascript">
 
- 
+  // Loading animation
+  $(document).ready(function() {  
+    
+    //Get the A tag
+    var id = $('#loading');
+
+    //Get the screen height and width
+    var maskHeight = $(document).height();
+    var maskWidth = $(window).width();
+
+    //Set heigth and width to mask to fill up the whole screen
+    $('#mask').css({'width':maskWidth,'height':maskHeight});
+
+    //transition effect   
+    $('#mask').fadeTo("slow",0.5);  
+
+    //Get the window height and width
+    var winH = $(window).height();
+    var winW = $(window).width();
+              
+    //Set the popup window to center
+    $(id).css('top',  winH/2-$(id).height()/2);
+    $(id).css('left', winW/2-$(id).width()/2);
+
+    //transition effect
+    $(id).fadeIn(2000); 
+    
+    
+    //if close button is clicked
+    $('.window .close').click(function (e) {
+      //Cancel the link behavior
+      e.preventDefault();
+      
+      $('#mask').hide();
+      $('#loading').hide();
+    });   
+    
+
+    $(window).resize(function () {
+     
+      var box = $('#boxes .window');
+   
+          //Get the screen height and width
+          var maskHeight = $(document).height();
+          var maskWidth = $(window).width();
+        
+          //Set height and width to mask to fill up the whole screen
+          $('#mask').css({'width':maskWidth,'height':maskHeight});
+                 
+          //Get the window height and width
+          var winH = $(window).height();
+          var winW = $(window).width();
+
+          //Set the popup window to center
+          box.css('top',  winH/2 - box.height()/2);
+          box.css('left', winW/2 - box.width()/2);
+     
+    });
+    
+  });
+
   $(".gridster ul").gridster({
     widget_margins: [10, 10],
     widget_base_dimensions: [150, 150]
   });
   
+
+
+
+
+
+  function endInit() {
+    // Trigger Mantis stat display !
+    $('#grid').trigger('triggerTilesFunctions', []);
+
+    console.log('klak');
+    // Hide loading dialog !
+    $('#mask').hide();
+    $('#loading').hide();
+    console.log($('#mask')[O]);
+  }
+
+
+
 
 
 

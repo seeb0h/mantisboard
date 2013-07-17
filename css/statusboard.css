@@ -202,4 +202,37 @@ div .weather .currently {
 }
 
 
+.window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
 
+#loading {
+  width:375px; 
+  height:203px;
+  text-align: center;
+  vertical-align: center;
+  margin: 0 auto;
+  padding:40px;
+  background-color: #2a2a2a;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 2em;
+  font-weight: 600;
+  color: #aaa;
+}
+
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}

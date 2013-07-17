@@ -1,5 +1,5 @@
 /*!
- * statusboard.chart.js
+ * statusboard.utilities.chart.js
  * http://statusboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
@@ -16,54 +16,6 @@ function setDataPieFromStruct (struct) {
   // Init data object for pie chart (colours attributes..)
   data = [
   {
-    value: 0,
-    color: "#4C5F97"
-  },
-  {
-    value : 0,
-    color : "#B75185"
-  },
-  {
-    value : 0,
-    color : "#A4CF5B"
-  },
-  {
-    value : 0,
-    color : "#DFB862"
-  },
-  {
-    value : 0,
-    color : "#2F427C"
-  },
-  {
-    value : 0,
-    color : "#973265"
-  },
-  {
-    value : 0,
-    color : "#80AA38"
-  },
-  {
-    value : 0,
-    color : "#B8913D"
-  },
-  {
-    value : 0,
-    color : "#6D7EB1"
-  },
-  {
-    value : 0,
-    color : "#C9729E"
-  },
-  {
-    value : 0,
-    color : "#B8DB7C"
-  },
-  {
-    value : 0,
-    color : "#E7C783"
-  },
-    {
     value: 0,
     color: "#4C5F97"
   },

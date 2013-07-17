@@ -116,8 +116,7 @@ function getMantisStats(projectID, filterID) {
         }
       });
 
-      // Trigger Mantis stat display !
-      $('#grid').trigger('triggerTilesFunctions', []);
+      endInit();
     });
 }
 
@@ -156,8 +155,7 @@ function getIssueCustomFields(issueID, isResolved, isLastIssue) {
   
       if(isLastIssue) {
         console.log(MantisCustomFields);
-        // Trigger Mantis stat display !
-        $('#grid').trigger('triggerTilesFunctions', []);
+        endInit();
       }
     });
 }
