@@ -18,8 +18,8 @@ define('MANTISCONNECT_URL', 'http://www.mantisbt.org/bugs/api/soap/mantisconnect
 // the username/password of the user account to use for calls
 // define('USERNAME', 'sbh');
 // define('PASSWORD', 'sh1r0w123M!');
-define('USERNAME', 'statusboard.mantis');
-define('PASSWORD', 'statusboard.mantis2013!');
+define('USERNAME', 'mantisboard.mantis');
+define('PASSWORD', 'mantisboard.mantis2013!');
 
 // ------------------------------------------------
 

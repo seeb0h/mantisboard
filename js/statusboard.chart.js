@@ -1,10 +1,10 @@
 /*!
- * statusboard.chart.js
- * http://statusboard.boschonline.eu/
+ * mantisboard.chart.js
+ * http://mantisboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
  * Released under the MIT license
- * https://github.com/seeb0h/statusboard/blob/master/REAME.md
+ * https://github.com/seeb0h/mantisboard/blob/master/REAME.md
  */
 
 
@@ -351,7 +351,7 @@ function plotRadar(chartCanvas,data) {
 //
 function plotRadarFromListStruct(chartCanvas,listStruct, listColours) {
   if(listColours==undefined)
-    listColours=statusboard.defaults.colors;
+    listColours=mantisboard.defaults.colors;
 
   var data = setDataRadarFromStruct(listStruct[0],listColours[0]);
   for (var i=1; i<listStruct.length; i++) {
@@ -511,7 +511,7 @@ function plotBar(chartCanvas,data) {
 //
 function plotBarFromListStruct(chartCanvas,listStruct, listColours) {
   if(listColours==undefined)
-    listColours=statusboard.defaults.colors;
+    listColours=mantisboard.defaults.colors;
 
   var data = setDataBarFromStruct(listStruct[0],listColours[0]);
   for (var i=1; i<listStruct.length; i++) {

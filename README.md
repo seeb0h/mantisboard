@@ -1,7 +1,15 @@
-# statusboard
+# mantisboard
 
 [mantis bugtracker](http://mantisbt.org/) dashboard
 
+## Documentation
+
+You can find documentation at [mantisboard](http://mantisboard.boschonline.eu).
+
+## Demo
+
+Check this [demo](http://mantisboard.boschonline.eu/demo) !
+It is linked to [mantisbt bugtracker] (http://www.mantisbt.org/bugs/view_all_bug_page.php) .
 
 ## Acknowledgments!
 
@@ -22,10 +30,6 @@ I am not using these libs but I am considering to do in a near/distant future:
 * [Panic's status board](http://panic.com/statusboard/)  
 * [Geckoboard](http://www.geckoboard.com/)
 
-## Documentation
-
-You can find documentation at [statusboard](http://statusboard.boschonline.eu).
-
 ## License
 
-Chart.js is available under the [MIT license] (https://github.com/seeb0h/statusboard/blob/master/LICENCE.md).
+Chart.js is available under the [WTFPL license] (http://www.wtfpl.net/).

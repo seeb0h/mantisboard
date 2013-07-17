@@ -1,10 +1,10 @@
 /*!
- * statusboard.tiles.functions.js
- * http://statusboard.boschonline.eu/
+ * mantisboard.tiles.functions.js
+ * http://mantisboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
  * Released under the MIT license
- * https://github.com/seeb0h/statusboard/blob/master/README.md
+ * https://github.com/seeb0h/mantisboard/blob/master/README.md
  */
 
 
@@ -42,8 +42,8 @@ function setTilesFunctions () {
 
         if(tile.displayFunction=='displayMantisCategoriesResolved') {
           element.bind('displayFunction', function(event, chartCanvas) {
-            // Set statusboard.params.status.resolvedID according to statusboard.params.status.resolvedName and status of the mantis
-            var statusResolvedID=getMantisStatusID(statusboard.params.status.resolvedName);
+            // Set mantisboard.params.status.resolvedID according to mantisboard.params.status.resolvedName and status of the mantis
+            var statusResolvedID=getMantisStatusID(mantisboard.params.status.resolvedName);
 
             var dataset={};
             // Count each Categories type for resolved issues
@@ -62,8 +62,8 @@ function setTilesFunctions () {
   
         if(tile.displayFunction=='displayMantisCategoriesBar') {
           element.bind('displayFunction', function(event, chartCanvas) {
-            // Set statusboard.params.status.resolvedID according to statusboard.params.status.resolvedName and status of the mantis
-            var statusResolvedID=getMantisStatusID(statusboard.params.status.resolvedName);
+            // Set mantisboard.params.status.resolvedID according to mantisboard.params.status.resolvedName and status of the mantis
+            var statusResolvedID=getMantisStatusID(mantisboard.params.status.resolvedName);
             
             var dataset=[];
             // Count each Categories type

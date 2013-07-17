@@ -1,10 +1,10 @@
 /*!
- * statusboard.tiles.js
- * http://statusboard.boschonline.eu/
+ * mantisboard.tiles.js
+ * http://mantisboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
  * Released under the MIT license
- * https://github.com/seeb0h/statusboard/blob/master/README.md
+ * https://github.com/seeb0h/mantisboard/blob/master/README.md
  */
 
 //
@@ -72,7 +72,7 @@ function displayMainCountdown(text,i) {
 };
 
 function displayMainFilterName(text,i) {
-  return '<div class="tileMain" id="tileMain_'+i+'"><h1><span>'+statusboard.params.projectName+'/<br/>'+statusboard.params.filterName+'</span></h1></div>'
+  return '<div class="tileMain" id="tileMain_'+i+'"><h1><span>'+mantisboard.params.projectName+'/<br/>'+mantisboard.params.filterName+'</span></h1></div>'
 };
 
 

@@ -1,13 +1,13 @@
-﻿/*!
- * statusboard.parameters.js
- * http://statusboard.boschonline.eu/
+/*!
+ * mantisboard.parameters.js
+ * http://mantisboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
  * Released under the MIT license
- * https://github.com/seeb0h/statusboard/blob/master/REAME.md
+ * https://github.com/seeb0h/mantisboard/blob/master/REAME.md
  */
 
- statusboard = {
+ mantisboard = {
   params: {
     url_mc_issue_get:"./mantisconnect_json.php?name=mc_issue_get",
     url_mc_filter_get_issue_headers:"./mantisconnect_json.php?name=mc_filter_get_issue_headers",
