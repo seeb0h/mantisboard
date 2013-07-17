@@ -7,7 +7,10 @@
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
-  <script src="js/statusboard.js?0018" type="text/javascript" charset="utf-8"></script>
+  <script src="js/statusboard.tiles.functions.js?0018" type="text/javascript" charset="utf-8"></script>
+  <script src="js/statusboard.tiles.js?0018" type="text/javascript" charset="utf-8"></script>
+  <script src="js/statusboard.chart.js?0018" type="text/javascript" charset="utf-8"></script>
+  <script src="js/statusboard.mantis.js?0021" type="text/javascript" charset="utf-8"></script>
 
   <script src="js/statusboard.parameters.js?0021" type="text/javascript" charset="utf-8"></script>
 
@@ -19,14 +22,16 @@
 <body>
 
 
-  <div class="gridster" id="grid">
-    <ul id="gridUL">
-    </ul>
-  </div>
+<div class="gridster" id="grid">
+  <ul id="gridUL">
+  </ul>
+</div>
 
-    <div id="dialog">
-        <div class="content"></div>
-    </div>
+<div id="dialog">
+    <div class="content"></div>
+</div>
+
+
 
 <script type="text/javascript">
 
@@ -38,210 +43,36 @@
   
 
 
-function createDialog(title, text) {
-  return $("<div class='dialog' title='" + title + "'><p>" + text + "</p></div>")
-  .dialog({
-      resizable: true,
-      width:600,
-      height:300,
-      modal: true,
-      buttons: {
-          "Confirm": function() {
-              dogetIssueCustomFields=true;
-              $( this ).dialog( "close" );
 
-          },
-          Cancel: function() {
-              dogetIssueCustomFields=false;
-              $( this ).dialog( "close" );
-          }
-      }
-  });
-}
+  dogetIssueCustomFields=false;
 
+  function createDialog(title, text) {
+    return $("<div class='dialog' title='" + title + "'><p>" + text + "</p></div>")
+    .dialog({
+        resizable: true,
+        width:600,
+        height:300,
+        modal: true,
+        buttons: {
+            "Confirm": function() {
+                dogetIssueCustomFields=true;
+                $( this ).dialog( "close" );
 
-
-function getIssueCustomFields(issueID, isResolved, isLastIssue) {
-  //Example usage (using jQuery):
-  var url = statusboard.params.url_mc_issue_get+"&issue_id="+issueID;
-  
-  $.getJSON(url) 
-    .fail(function(data) {
-      alert('Could not connect to : '+url);
-    })
-    .done(function(data) {
-      // for (var i=0; i<data.custom_fields.length; i++) {
-      //   if(MantisCustomFields[data.custom_fields[i].field.name]==undefined)
-      //     MantisCustomFields[data.custom_fields[i].field.name] = {};
-      //   if(isResolved) {
-      //     if(MantisCustomFieldsResolved[data.custom_fields[i].field.name]==undefined)
-      //       MantisCustomFieldsResolved[data.custom_fields[i].field.name] = {};
-      //   }
-      // }
-      // for (var i=0; i<data.custom_fields.length; i++) {
-      //   if(MantisCustomFields[data.custom_fields[i].field.name][data.custom_fields[i].value]==undefined)
-      //     MantisCustomFields[data.custom_fields[i].field.name][data.custom_fields[i].value]=0;
-      //   MantisCustomFields[data.custom_fields[i].field.name][data.custom_fields[i].value]++;
-      // if(isResolved) {
-      //     if(MantisCustomFieldsResolved[data.custom_fields[i].field.name][data.custom_fields[i].value]==undefined)
-      //       MantisCustomFieldsResolved[data.custom_fields[i].field.name][data.custom_fields[i].value]=0;
-      //     MantisCustomFieldsResolved[data.custom_fields[i].field.name][data.custom_fields[i].value]++;
-      //   }
-  
-      // }
-  
-      if(isLastIssue)
-        console.log(MantisCustomFields);
-
-      // for (var type in MantisCustomFields) {
-      //   if(type=="Composant_SANDIE") {
-      //     // update CustomFields counter
-      //     if(counterComposantSandie[MantisCustomFields[type]]==undefined)
-      //       counterComposantSandie[MantisCustomFields[type]]=0;
-      //     counterComposantSandie[MantisCustomFields[type]]++;
-      //     console.log('counterComposantSandie['+MantisCustomFields[type]+'] :'+counterComposantSandie[MantisCustomFields[type]]);
-      //   }
-    });
-}
-
-
-
-
-
-
-
-dogetIssueCustomFields=false;
-
-
-//
-// Get Mantis stats on selected filter
-//
-function getMantisProjectID() {
-  //Example usage (using jQuery):
-  var url = statusboard.params.url_mc_project_get_id_from_name+"&project_name="+statusboard.params.projectName;
-
-  // Store mantis JSON and trigger display when finished
-  $.getJSON(url) 
-    .fail(function(data) {
-      alert('Could not connect to : '+url);
-    })
-    .done(function(data) {
-      statusboard.params.projectID=data;
-
-      getMantisFilterID(statusboard.params.projectID);
-    });
-}
-
-
-//
-// Get Mantis stats on selected filter
-//
-function getMantisFilterID(projectID) {
-  //Example usage (using jQuery):
-  var url = statusboard.params.url_mc_filter_get+"&project_id="+projectID;
-
-  // Store mantis JSON and trigger display when finished
-  $.getJSON(url) 
-    .fail(function(data) {
-      alert('Could not connect to : '+url);
-    })
-    .done(function(data) {
-      $.each(data, function(i, item) {
-        if(statusboard.params.filterName==item.name) {
-          statusboard.params.filterID=item.id;
-
-          setMantisStats(statusboard.params.projectID, statusboard.params.filterID)
+            },
+            Cancel: function() {
+                dogetIssueCustomFields=false;
+                $( this ).dialog( "close" );
+            }
         }
-          
-      });
     });
-}
-
-//
-// Get Mantis stats on selected filter
-//
-function setMantisStats(projectID, filterID) {
-  //Example usage (using jQuery):
-  var url = statusboard.params.url_mc_filter_get_issue_headers+"&project_id="+projectID+"&filter_id="+filterID+"&page_number=1&per_page=500";
-
-  // Store mantis JSON and trigger display when finished
-  $.getJSON(url) 
-    .fail(function(data) {
-      alert('Could not connect to : '+url);
-    })
-    .done(function(data) {
-      MantisJSON=data;
-
-      numIssues = data.length;
-      $.each(data, function(i, item) {
-        isLastIssue=((numIssues-1-i)==0);
-        isResolved=(item.status==statusboard.params.resolvedID);
-        if(isLastIssue) {
-          //createDialog('Confirmation', 'Running this script will cause quite massive SOAP requests. Do you really want to continue ?');
-          if(dogetIssueCustomFields)
-            getIssueCustomFields(item.id,isResolved,isLastIssue);        
-        }
-      });
-
-
-      $('#grid').trigger('triggerTilesFunctions', []);
-    });
-}
-
-    
+  }
 
 
 
+  displayTiles();
 
+  initMantisStats();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-// Display N first FA in a tile
-//
-function displayMantisFirstFA(filterID, numFA, tileElement) {
-  //Example usage (using jQuery):
-  var url = "./mantisconnect_json.php?name=mc_filter_get_issue_headers&project_id=203&filter_id="+filterID+"&page_number=1&per_page="+numFA;
-  var ListFA='<ul class="ListFA">';
-
-  $.getJSON(url, function(data) {
-    $.each(data, function(i, item) {
-       //console.log(item.id + ': ' + item.summary);
-       ListFA+='<li>' + item.id + ': ' + item.summary + '</li>'
-     });
-    ListFA+='</ul>'
-
-    tileElement.html(ListFA);
-  });
-
-}
-
-
-getMantisProjectID();
-
-
-displayTiles();
-
-
-
-
-
-//displayMantisFirstFA("2910","7",$("#ListFA"));
-
-//plotMantisStats("7621");
-//displayMantisFirstFA("7621","7",$("#TileMantis"));
 
 
 

@@ -1,12 +1,30 @@
-﻿statusboard = {
+﻿/*!
+ * statusboard.parameters.js
+ * http://statusboard.boschonline.eu/
+ *
+ * Copyright 2013 Sébastien BOSCH
+ * Released under the MIT license
+ * https://github.com/seeb0h/statusboard/blob/master/REAME.md
+ */
+
+ statusboard = {
   params: {
     url_mc_issue_get:"./mantisconnect_json.php?name=mc_issue_get",
     url_mc_filter_get_issue_headers:"./mantisconnect_json.php?name=mc_filter_get_issue_headers",
     url_mc_filter_get:"./mantisconnect_json.php?name=mc_filter_get",
     url_mc_project_get_id_from_name:"./mantisconnect_json.php?name=mc_project_get_id_from_name",
-    projectName:'AIV',
-    filterName:'Sprint R02S02-Composant',
-    resolvedID:'80',
+    url_mc_mc_enum_status:"./mantisconnect_json.php?name=mc_enum_status",
+    projectName:'mantisbt',
+    filterName:'My Monitored Issues',
+    status: {
+      newName:'new',
+      feedbackName:'feedback',
+      acknowledgedName:'acknowledged',
+      confirmedName:'confirmed',
+      assignedName:'assigned',
+      resolvedName:'resolved',
+      closedName:'closed',
+    },
     keyTISSEO:'',
   },
   defaults: {
@@ -14,22 +32,14 @@
   }
 }
 
-const JSONtiles = [{
-  type : 'H1',
+const JSONtiles = [
+{
+  type : 'FilterName',
   headerText:'MANTIS FILTER',
-  mainText:'Sprint R02S02-Composant',
+  mainText:'',
   row:1,
   col:1,
   sizex:3,
-  sizey:1
-},
-{
-  type : 'Countdown',
-  headerText:'SPRINT END',
-  mainText:'2013/07/17/18/0/0',
-  row:3,
-  col:5,
-  sizex:1,
   sizey:1
 },
 {
@@ -52,7 +62,7 @@ const JSONtiles = [{
 },
 {
   type : 'Chart',
-  headerText:'PROGRESS',
+  headerText:'ISSUES PROGRESS (TOTAL/RESOLVED)',
   mainText:'',
   displayFunction:'displayMantisCategoriesBar',
   chartColors:[[255,160,160],[204,238,221]],
@@ -63,7 +73,7 @@ const JSONtiles = [{
 },
 {
   type : 'Chart',
-  headerText:'TOTAL ISSUES',
+  headerText:'TOTAL ISSUES / CATEGORY',
   mainText:'',
   displayFunction:'displayMantisCategories', 
   row:1,
@@ -73,7 +83,7 @@ const JSONtiles = [{
 },
 {
   type : 'Chart',
-  headerText:'RESOLVED ISSUES',
+  headerText:'RESOLVED ISSUES / CATEGORY',
   mainText:'',
   displayFunction:'displayMantisCategoriesResolved', 
   row:2,
@@ -117,7 +127,35 @@ const JSONtiles = [{
   col:4,
   sizex:1,
   sizey:1
-}
+},
+{
+  type : 'H1',
+  headerText:'SPRINT',
+  mainText:'R02S02',
+  row:4,
+  col:5,
+  sizex:1,
+  sizey:1
+},
+{
+  type : 'Countdown',
+  headerText:'SPRINT END',
+  mainText:'2013/07/17/18/0/0',
+  row:3,
+  col:5,
+  sizex:1,
+  sizey:1
+},
+{
+  type : 'Chart',
+  headerText:'TOTAL ISSUES / STATUS',
+  mainText:'',
+  displayFunction:'displayMantisStatus', 
+  row:4,
+  col:6,
+  sizex:2,
+  sizey:2
+},
 ];
 
 
