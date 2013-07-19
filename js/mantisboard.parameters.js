@@ -3,17 +3,13 @@
  * http://mantisboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
- * Released under the MIT license
+ * Released under the WTFPL license
  * https://github.com/seeb0h/mantisboard/blob/master/REAME.md
  */
 
  mantisboard = {
   params: {
-    url_mc_issue_get:"./mantisconnect_json.php?name=mc_issue_get",
-    url_mc_filter_get_issue_headers:"./mantisconnect_json.php?name=mc_filter_get_issue_headers",
-    url_mc_filter_get:"./mantisconnect_json.php?name=mc_filter_get",
-    url_mc_project_get_id_from_name:"./mantisconnect_json.php?name=mc_project_get_id_from_name",
-    url_mc_mc_enum_status:"./mantisconnect_json.php?name=mc_enum_status",
+    mantis_parameter_file : "mantis",
     projectName:'mantisbt',
     filterName:'My Monitored Issues',
     status: {

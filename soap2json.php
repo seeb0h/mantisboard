@@ -11,19 +11,20 @@
 
 //ini_set("default_socket_timeout", 10);
 
-// URL to your Mantis SOAP API (the mantisconnect.php file)
-define('MANTISCONNECT_URL', 'http://www.mantisbt.org/bugs/api/soap/mantisconnect.php');
-//define('MANTISCONNECT_URL', 'https://web.magellium.fr/mantis/api/soap/mantisconnect.php');
-
-// the username/password of the user account to use for calls
-// define('USERNAME', 'sbh');
-// define('PASSWORD', 'sh1r0w123M!');
-define('USERNAME', 'mantisboard.mantis');
-define('PASSWORD', 'mantisboard.mantis2013!');
 
 // ------------------------------------------------
 
 parse_str($_SERVER['QUERY_STRING'], $args);
+
+// check if service is given in parameter
+if (!isset($args['service'])) 
+    die("No service specified.");
+// check if this service exists
+if(!@include("./soap2json_" . $args['service'] . ".php")) 
+    die("Service specified is unknown" . $service_name);
+// remove parameter service from arguments
+unset($args['service']);
+
 
 // get SOAP function name to call
 if (!isset($args['name'])) {
@@ -33,6 +34,7 @@ $function_name = $args['name'];
 
 // remove function name from arguments
 unset($args['name']);
+$args = array_values($args);
 
 // prepend username/passwords to arguments
 $args = array_merge(

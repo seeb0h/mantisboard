@@ -3,7 +3,7 @@
  * http://mantisboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
- * Released under the MIT license
+ * Released under the WTFPL license
  * https://github.com/seeb0h/mantisboard/blob/master/REAME.md
  */
 
@@ -18,8 +18,7 @@ function initMantisStats() {
 // Store Mantis enum status
 //
 function getMantisEnumStatus() {
-  //Example usage (using jQuery):
-  var url = mantisboard.params.url_mc_mc_enum_status;
+  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_enum_status';
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -39,8 +38,7 @@ function getMantisEnumStatus() {
 // Get project ID associated with project name
 //
 function getMantisProjectID() {
-  //Example usage (using jQuery):
-  var url = mantisboard.params.url_mc_project_get_id_from_name+"&project_name="+mantisboard.params.projectName;
+  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_project_get_id_from_name&project_name='+mantisboard.params.projectName;
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -63,8 +61,7 @@ function getMantisProjectID() {
 // Get filter ID associated with filter name
 //
 function getMantisFilterID(projectID) {
-  //Example usage (using jQuery):
-  var url = mantisboard.params.url_mc_filter_get+"&project_id="+projectID;
+  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_filter_get&project_id='+projectID;
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -92,8 +89,7 @@ function getMantisFilterID(projectID) {
 // Get Mantis stats on selected filter
 //
 function getMantisStats(projectID, filterID) {
-  //Example usage (using jQuery):
-  var url = mantisboard.params.url_mc_filter_get_issue_headers+"&project_id="+projectID+"&filter_id="+filterID+"&page_number=1&per_page=500";
+  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_filter_get_issue_headers&project_id='+projectID+'&filter_id='+filterID+'&page_number=1&per_page=500';
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -125,8 +121,7 @@ function getMantisStats(projectID, filterID) {
 // Get Mantis custom fields stats on selected issue
 //
 function getIssueCustomFields(issueID, isResolved, isLastIssue) {
-  //Example usage (using jQuery):
-  var url = mantisboard.params.url_mc_issue_get+"&issue_id="+issueID;
+  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_issue_get&issue_id='+issueID;
   
   $.getJSON(url) 
     .fail(function(data) {
@@ -201,8 +196,8 @@ function getMantisStatusName(statusID) {
 // DEPRECATED : display N first FA in a tile
 //
 function displayMantisFirstFA(filterID, numFA, tileElement) {
-  //Example usage (using jQuery):
-  var url = "./mantisconnect_json.php?name=mc_filter_get_issue_headers&project_id=203&filter_id="+filterID+"&page_number=1&per_page="+numFA;
+  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_filter_get_issue_headers&project_id=203&filter_id='+filterID+'&page_number=1&per_page='+numFA;
+
   var ListFA='<ul class="ListFA">';
 
   $.getJSON(url, function(data) {

@@ -3,7 +3,7 @@
  * http://mantisboard.boschonline.eu/
  *
  * Copyright 2013 Sébastien BOSCH
- * Released under the MIT license
+ * Released under the WTFPL license
  * https://github.com/seeb0h/mantisboard/blob/master/README.md
  */
 
