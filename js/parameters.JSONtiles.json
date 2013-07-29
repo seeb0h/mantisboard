@@ -1,0 +1,126 @@
+JSONtiles = [
+{
+  "type" : "FilterName",
+  "headerText" : "MANTIS FILTER",
+  "mainText" : "",
+  "row" : "1",
+  "col" : "1",
+  "sizex" : "3",
+  "sizey" : "1"
+},
+{
+  "type" : "Weather",
+  "headerText" : "METEO",
+  "mainText" : "weatherToulouse",
+  "row" : "1",
+  "col" : "6",
+  "sizex" : "1",
+  "sizey" : "1"
+},
+{
+  "type" : "Weather",
+  "headerText" : "METEO",
+  "mainText" : "weatherLePecq",
+  "row" : "1",
+  "col" : "7",
+  "sizex" : "1",
+  "sizey" : "1"
+},
+{
+  "type" : "Chart",
+  "headerText" : "ISSUES PROGRESS (TOTAL/RESOLVED)",
+  "mainText" : "",
+  "displayFunction" : "displayMantisCategoriesBar",
+  "chartColors" : [[255,160,160],[204,238,221]],
+  "row" : "3",
+  "col" : "1",
+  "sizex" : "3",
+  "sizey" : "2"
+},
+{
+  "type" : "Chart",
+  "headerText" : "TOTAL ISSUES / CATEGORY",
+  "mainText" : "",
+  "displayFunction" : "displayMantisCategories", 
+  "row" : "1",
+  "col" : "4",
+  "sizex" : "2",
+  "sizey" : "2"
+},
+{
+  "type" : "Chart",
+  "headerText" : "RESOLVED ISSUES / CATEGORY",
+  "mainText" : "",
+  "displayFunction" : "displayMantisCategoriesResolved", 
+  "row" : "2",
+  "col" : "6",
+  "sizex" : "2",
+  "sizey" : "2"
+},
+{
+  "type" : "Chart",
+  "headerText" : "COMPOSANT SANDIE",
+  "mainText" : "",
+  "displayFunction" : "displayMantisComposantSANDIE", 
+  "row" : "2",
+  "col" : "1",
+  "sizex" : "3",
+  "sizey" : "1"
+},
+{
+  "type" : "P",
+  "headerText" : "FA list",
+  "mainText" : "blabla<br/>fdfd",
+  "row" : "7",
+  "col" : "1",
+  "sizex" : "4",
+  "sizey" : "1"
+},
+{
+  "type" : "Date",
+  "headerText" : "",
+  "mainText" : "",
+  "row" : "3",
+  "col" : "4",
+  "sizex" : "1",
+  "sizey" : "1"
+},
+{
+  "type" : "Tisseo",
+  "headerText" : "NEXT BUS",
+  "mainText" : "3245432", // bus stop id
+  "row" : "4",
+  "col" : "4",
+  "sizex" : "1",
+  "sizey" : "1"
+},
+{
+  "type" : "H1",
+  "headerText" : "SPRINT",
+  "mainText" : "R02S02",
+  "row" : "4",
+  "col" : "5",
+  "sizex" : "1",
+  "sizey" : "1"
+},
+{
+  "type" : "Countdown",
+  "headerText" : "SPRINT END",
+  "mainText" : "2013/07/17/18/0/0",
+  "row" : "3",
+  "col" : "5",
+  "sizex" : "1",
+  "sizey" : "1"
+},
+{
+  "type" : "Chart",
+  "headerText" : "TOTAL ISSUES / STATUS",
+  "mainText" : "",
+  "displayFunction" : "displayMantisStatus", 
+  "row" : "4",
+  "col" : "6",
+  "sizex" : "2",
+  "sizey" : "2"
+},
+];
+

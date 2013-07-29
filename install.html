@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/jquery.gridster.min.css">
+  <link rel="stylesheet" type="text/css" href="css/mantisboard.css?0012">
+  <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+
+  <script src="js/mantisboard.parameters.js?0021" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mantisboard.js?0021" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<div class="config" >
+  <div class="configHeader" >
+    Settings
+  </div>
+  <div class="configMain" >
+
+    <form class="formConfig" id="formConfigWarning" action="javascript:writeConfig();">
+        <div id="msgConfigWarning">Following input(s) are not filled. Are you sure to proceed ?<ul></ul></div>
+        <button type="submit">Validate</button>
+    </form>
+
+    <div id="msgConfigSuccess"></div>
+
+    <form class="formConfig" id="formConfig" action="javascript:writeConfig();" onsubmit="return checkValidation();">
+        <label>mantis_url <input type="text" name="mantis_url" /></label>
+        <label>mantis_username <input type="text" name="mantis_username" /></label>
+        <label>mantis_password <input type="password" name="mantis_password" maxlength="40" /></label>
+        <label>projectName <input type="text" name="projectName" /></label>
+        <label>filterName <input type="text" name="filterName" /></label>
+        <label>issueLimit <input type="text" name="issueLimit" /></label>
+        <label>keyTISSEO <input type="text" name="keyTISSEO" /></label>
+        <label>chartColors <input type="text" name="chartColors" /></label>
+        <label>status_newName <input type="text" name="status_newName" /></label>
+        <label>status_feedbackName <input type="text" name="status_feedbackName" /></label>
+        <label>status_acknowledgedName <input type="text" name="status_acknowledgedName" /></label>
+        <label>status_confirmedName <input type="text" name="status_confirmedName" /></label>
+        <label>status_assignedName <input type="text" name="status_assignedName" /></label>
+        <label>status_resolvedName <input type="text" name="status_resolvedName" /></label>
+        <label>status_closedName <input type="text" name="status_closedName" /></label>
+        <button type="submit" >Validate</button>
+    </form>
+
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+// Fill with params in use
+  for (var item in mantisboard.params) {
+    $("input[type='text'][name="+item+"]").val(mantisboard.params[item]);
+  }
+  for (var item in mantisboard.params.status) {
+    $("input[type='text'][name=status_"+item+"]").val(mantisboard.params.status[item]);
+  }
+
+
+// Check validation
+//$("#form_parameters").submit(checkValidation);
+  console.log($("#form_parameters"));
+
+// Hide validation messages
+$("#formConfigWarning").hide();
+$("#msgConfigSuccess").hide();
+
+
+
+function checkValidation() {
+  console.log("checkValidation");
+  needCheck=false;
+
+  //empty previous msgs
+  $("#msgConfigWarning>ul").html('');
+
+  // check input
+  for (var item in mantisboard.params) {
+    console.log('item '+$("input[type='text'][name="+item+"]").val());
+    if($("input[type='text'][name="+item+"]").val()=="") {
+      $("#msgConfigWarning>ul").append('<li>'+item+"</li>");
+      $("#formConfigWarning").show();
+
+      needCheck=true;
+    }
+  }
+
+  if (!needCheck) {
+    $("#msgConfigSuccess").text("Parameters saved !").show().fadeOut(2000);
+    return true;
+  }
+  return false;
+}
+
+
+function writeConfig() {
+  for (var item in mantisboard.params) {
+    if(item!="status")
+      mantisboard.params[item]=$("input[type='text'][name="+item+"]").val();
+  }
+  for (var item in mantisboard.params.status) {
+    mantisboard.params.status[item]=$("input[type='text'][name=status_"+item+"]").val();
+  }
+
+  writeJSONParameters("mantisboard");
+
+  $("#msgConfigSuccess").text("Parameters saved !").show().fadeOut(4000);
+
+  console.log($("#formConfigWarning"));
+
+  $("#formConfigWarning").hide();
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>

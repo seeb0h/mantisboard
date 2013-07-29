@@ -303,7 +303,7 @@ function plotRadar(chartCanvas,data) {
 //
 function plotRadarFromListStruct(chartCanvas,listStruct, listColours) {
   if(listColours==undefined)
-    listColours=mantisboard.defaults.colors;
+    listColours=mantisboard.chartColors;
 
   var data = setDataRadarFromStruct(listStruct[0],listColours[0]);
   for (var i=1; i<listStruct.length; i++) {
@@ -463,7 +463,7 @@ function plotBar(chartCanvas,data) {
 //
 function plotBarFromListStruct(chartCanvas,listStruct, listColours) {
   if(listColours==undefined)
-    listColours=mantisboard.defaults.colors;
+    listColours=mantisboard.chartColors;
 
   var data = setDataBarFromStruct(listStruct[0],listColours[0]);
   for (var i=1; i<listStruct.length; i++) {

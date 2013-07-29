@@ -18,7 +18,7 @@ function initMantisStats() {
 // Store Mantis enum status
 //
 function getMantisEnumStatus() {
-  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_enum_status';
+  var url = 'soap2json.php?service=mantis&name=mc_enum_status';
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -26,8 +26,8 @@ function getMantisEnumStatus() {
       alert('Could not connect to : '+url);
     })
     .done(function(data) {
-      mantisboard.params.enumStatus=data;
-      console.log('mantisboard.params.enumStatus : '+mantisboard.params.enumStatus);
+      mantisboard.enumStatus=data;
+      console.log('mantisboard.enumStatus : '+mantisboard.enumStatus);
 
       // Next Mantis function
       getMantisProjectID();
@@ -38,7 +38,7 @@ function getMantisEnumStatus() {
 // Get project ID associated with project name
 //
 function getMantisProjectID() {
-  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_project_get_id_from_name&project_name='+mantisboard.params.projectName;
+  var url = 'soap2json.php?service=mantis&name=mc_project_get_id_from_name&project_name='+mantisboard.projectName;
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -46,13 +46,13 @@ function getMantisProjectID() {
       alert('Could not connect to : '+url);
     })
     .done(function(data) {
-      mantisboard.params.projectID=data;
+      mantisboard.projectID=data;
 
-      console.log('mantisboard.params.projectName : '+mantisboard.params.projectName);
-      console.log('mantisboard.params.projectID : '+mantisboard.params.projectID);
+      console.log('mantisboard.projectName : '+mantisboard.projectName);
+      console.log('mantisboard.projectID : '+mantisboard.projectID);
 
       // Next Mantis function
-      getMantisFilterID(mantisboard.params.projectID);
+      getMantisFilterID(mantisboard.projectID);
     });
 }
 
@@ -61,7 +61,7 @@ function getMantisProjectID() {
 // Get filter ID associated with filter name
 //
 function getMantisFilterID(projectID) {
-  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_filter_get&project_id='+projectID;
+  var url = 'soap2json.php?service=mantis&name=mc_filter_get&project_id='+projectID;
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -71,14 +71,14 @@ function getMantisFilterID(projectID) {
     .done(function(data) {
       $.each(data, function(i, item) {
         console.log('item.name : '+item.name);
-        if(mantisboard.params.filterName==item.name) {
-          mantisboard.params.filterID=item.id;
+        if(mantisboard.filterName==item.name) {
+          mantisboard.filterID=item.id;
 
-          console.log('mantisboard.params.filterName : '+mantisboard.params.filterName);
-          console.log('mantisboard.params.filterID : '+mantisboard.params.filterID);
+          console.log('mantisboard.filterName : '+mantisboard.filterName);
+          console.log('mantisboard.filterID : '+mantisboard.filterID);
 
           // Next Mantis function
-          getMantisStats(mantisboard.params.projectID, mantisboard.params.filterID)
+          getMantisStats(mantisboard.projectID, mantisboard.filterID)
         }
           
       });
@@ -89,7 +89,7 @@ function getMantisFilterID(projectID) {
 // Get Mantis stats on selected filter
 //
 function getMantisStats(projectID, filterID) {
-  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_filter_get_issue_headers&project_id='+projectID+'&filter_id='+filterID+'&page_number=1&per_page=500';
+  var url = 'soap2json.php?service=mantis&name=mc_filter_get_issue_headers&project_id='+projectID+'&filter_id='+filterID+'&page_number=1&per_page='+mantisboard.issueLimit;
 
   // Store mantis JSON and trigger display when finished
   $.getJSON(url) 
@@ -104,7 +104,7 @@ function getMantisStats(projectID, filterID) {
       numIssues = data.length;
       $.each(data, function(i, item) {
         isLastIssue=((numIssues-1-i)==0);
-        isResolved=(item.status==mantisboard.params.status.resolvedID);
+        isResolved=(item.status==mantisboard.status.resolvedID);
         if(isLastIssue) {
           //createDialog('Confirmation', 'Running this script will cause quite massive SOAP requests. Do you really want to continue ?');
           if(dogetIssueCustomFields)
@@ -121,7 +121,7 @@ function getMantisStats(projectID, filterID) {
 // Get Mantis custom fields stats on selected issue
 //
 function getIssueCustomFields(issueID, isResolved, isLastIssue) {
-  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_issue_get&issue_id='+issueID;
+  var url = 'soap2json.php?service=mantis&name=mc_issue_get&issue_id='+issueID;
   
   $.getJSON(url) 
     .fail(function(data) {
@@ -165,7 +165,7 @@ function getIssueCustomFields(issueID, isResolved, isLastIssue) {
 //
 function getMantisStatusID(statusName) {
   var statusID;
-  $.each(mantisboard.params.enumStatus, function(i, item) {
+  $.each(mantisboard.enumStatus, function(i, item) {
     if(statusName==item.name) {
       statusID = item.id;
       return false;
@@ -179,7 +179,7 @@ function getMantisStatusID(statusName) {
 //
 function getMantisStatusName(statusID) {
   var statusName;
-  $.each(mantisboard.params.enumStatus, function(i, item) {
+  $.each(mantisboard.enumStatus, function(i, item) {
     if(statusID==item.id) {
       statusName = item.name;
       return false;
@@ -196,7 +196,7 @@ function getMantisStatusName(statusID) {
 // DEPRECATED : display N first FA in a tile
 //
 function displayMantisFirstFA(filterID, numFA, tileElement) {
-  var url = 'soap2json.php?service='+mantisboard.params.mantis_parameter_file+'&name=mc_filter_get_issue_headers&project_id=203&filter_id='+filterID+'&page_number=1&per_page='+numFA;
+  var url = 'soap2json.php?service=mantis&name=mc_filter_get_issue_headers&project_id=203&filter_id='+filterID+'&page_number=1&per_page='+numFA;
 
   var ListFA='<ul class="ListFA">';
 

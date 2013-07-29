@@ -26,11 +26,11 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: normal;
-    color: #0a0;
+    color: #aaa;
 }
 
 a {
-    color: #0a0;
+    color: #aaa;
     text-decoration: underline;
     font-weight: bold;
 }
@@ -70,6 +70,67 @@ a {
 }
 
 
+
+div .configHeader {
+  width: 800px; 
+  margin: 0 auto;
+  padding:5px 10px;
+  height:30px;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 600;
+  background-color: #444;
+  color:#aaa; 
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+
+div .configMain {
+  width: 800px; 
+  margin: 0 auto;
+  color:#aaa; 
+  background-color: #333;  
+}
+
+
+.formConfig {
+  text-align: center;
+  font-weight: 500;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+#formConfig label {
+  text-align: left;
+  display: block;
+  margin: 10px 0 10px 100px;
+  width: 500px;
+}
+
+#formConfig label input {
+  float: right;
+  width:200px;
+}
+
+
+#formConfigWarning {
+  color : #500;
+  background-color : #a88;
+}
+
+#formConfigWarning div {
+  text-align: left;
+  display: block;
+  padding: 10px 0 10px 100px;
+}
+
+div #msgConfigSuccess {
+  text-align: center;
+  color : #050;
+  background-color : #8a8;
+  font-weight: 500;
+  padding: 10px 100px 10px 100px;
+}
 
 div .tileHeader {
   padding:5px 10px;

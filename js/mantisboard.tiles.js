@@ -10,7 +10,6 @@
 //
 // Specific tiles
 //
-function displayLi(row,col,sizex,sizey,i) {return '<li data-row="'+row+'" data-col="'+col+'" data-sizex="'+sizex+'" data-sizey="'+sizey+'" class="gs_w" style="position: absolute;" id="tile_'+i+'">'};
 function displayHeader(text,i) {return '<div class="tileHeader" id="tileHeader_'+i+'"><p>'+text+'</p></div>'};
 function displayMainH1(text,i) {return '<div class="tileMain" id="tileMain_'+i+'"><h1><span>'+text+'</span></h1></div>'};
 function displayMainP(text,i) {return '<div class="tileMain" id="tileMain_'+i+'"><p><span>'+text+'</span></p></div>'};
@@ -72,7 +71,7 @@ function displayMainCountdown(text,i) {
 };
 
 function displayMainFilterName(text,i) {
-  return '<div class="tileMain" id="tileMain_'+i+'"><h1><span>'+mantisboard.params.projectName+'/<br/>'+mantisboard.params.filterName+'</span></h1></div>'
+  return '<div class="tileMain" id="tileMain_'+i+'"><h1><span>'+mantisboard.projectName+'/<br/>'+mantisboard.filterName+'</span></h1></div>'
 };
 
 
@@ -83,8 +82,8 @@ function displayMainTisseo(text,i) {
 //
 // Set CSS wrt to tiles size. In order to center tiles contents
 //
-function setTilesCSS(tiles) {
-  for (var i=0; i<tiles.length; i++) {
+function setTilesCSS() {
+  $.each(JSONtiles, function(i, tile) {
     var gs_w_width=$('#tile_'+i).width();
     var gs_w_height=$('#tile_'+i).height();
 
@@ -133,7 +132,7 @@ function setTilesCSS(tiles) {
     $('#tileMain_'+i).css("background",colorMain);
     $('#tile_'+i).css("background",colorMain);
 
-  }
+  });
 }
 
 //
@@ -142,7 +141,7 @@ function setTilesCSS(tiles) {
 function initTiles () {
   var tiles=[];
   $.each(JSONtiles, function(i, tile) {
-    tiles.push(displayLi(tile.row,tile.col,tile.sizex,tile.sizey,i)+'</li>');
+    gridster.add_widget('<li class="gs_w" style="position: absolute;" id="tile_'+i+'"></li>', tile.sizex, tile.sizey, tile.col, tile.row);
   });
 
   $("#grid>ul").append(tiles.join(''));
@@ -194,21 +193,47 @@ function displayTiles () {
       tileMainFunction=displayMainFilterName;
     }
 
-
-    tiles.push(displayLi(tile.row,tile.col,tile.sizex,tile.sizey,i)+displayHeaderFunction(tile.headerText,i)+tileMainFunction(tile.mainText,i)+'</li>');
+    $("#tile_"+i).html(displayHeaderFunction(tile.headerText,i)+tileMainFunction(tile.mainText,i));
   });
 
-  // Step 3 : add the tiles to the DOM
-  $("#grid>ul").html(tiles.join(''));
+  // Step 3 : set the css for centering and colours purpose
+  setTilesCSS();
 
-  // Step 4 : set the css for centering and colours purpose
-  setTilesCSS(tiles);
-
-  // Step 5 : set function used by tiles (mainly used for chart tiles)
+  // Step 4 : set function used by tiles (mainly used for chart tiles)
   setTilesFunctions ();
 
-  // Step 6 : set a trigger function on grid div in order to call it later to launch tiles functions.
+  // Step 5 : set a trigger function on grid div in order to call it later to launch tiles functions.
   setTriggerTilesFunctions ();
+}
+
+
+
+//
+// Set function called for each tiles
+//
+function setTilesFunctions () {
+  $.each(JSONtiles, function(i, tile) {
+    var element;
+
+    element = $('#tileMain_'+i+'>canvas');
+
+
+    if(tile.displayFunction!=undefined) {  
+      // function for charts
+      if(element[0]) {
+        // console.log('#tileMain_'+i+'>canvas : ' + element[0]);
+        // console.log('tile.displayFunction : ' + tile.displayFunction);
+
+        // Add a dynamic call to the function defined in each tile.displayFunction 
+        element.bind('displayFunction', {chartCanvas : element, chartColors : tile.chartColors}, function(event) { 
+          window[tile.displayFunction](event.data.chartCanvas, event.data.chartColors);
+        });
+
+
+      }
+    }
+  
+  });
 }
 
 

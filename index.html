@@ -8,12 +8,12 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
   <script src="js/mantisboard.js?0018" type="text/javascript" charset="utf-8"></script>
-  <script src="js/mantisboard.tiles.functions.js?0018" type="text/javascript" charset="utf-8"></script>
-  <script src="js/mantisboard.tiles.js?0018" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mantisboard.tiles.functions.js?0019" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mantisboard.tiles.js?0019" type="text/javascript" charset="utf-8"></script>
   <script src="js/mantisboard.chart.js?0018" type="text/javascript" charset="utf-8"></script>
   <script src="js/mantisboard.mantis.js?0021" type="text/javascript" charset="utf-8"></script>
 
-  <script src="js/mantisboard.parameters.js?0021" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mantisboard.parameters.js?0021" type="text/javascript" charset="utf-8"></script> 
 
   <script src="js/simpleweather.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/jquery.gridster.min.js" type="text/javascript" charset="utf-8"></script>
@@ -44,41 +44,27 @@
 
 
 <script type="text/javascript">
+  var grister={};
 
   // Load animation
   initLoadingAnimation();
 
+  // Init grid layout
+  $(function(){ //DOM Ready
+    gridster = $(".gridster ul").gridster({
+      widget_margins: [10, 10],
+      widget_base_dimensions: [150, 150]
+    }).data('gridster');
+
+  });
+
+
+
+
   dogetIssueCustomFields=false;
 
-  function createDialog(title, text) {
-    return $("<div class='dialog' title='" + title + "'><p>" + text + "</p></div>")
-    .dialog({
-        resizable: true,
-        width:600,
-        height:300,
-        modal: true,
-        buttons: {
-            "Confirm": function() {
-                dogetIssueCustomFields=true;
-                $( this ).dialog( "close" );
-
-            },
-            Cancel: function() {
-                dogetIssueCustomFields=false;
-                $( this ).dialog( "close" );
-            }
-        }
-    });
-  }
-
-
-
-  displayTiles();
-
-  initMantisStats();
-
-
-
+  // Read parameters and display tiles
+  readJSONParameters("mantisboard");
 
 </script>
 

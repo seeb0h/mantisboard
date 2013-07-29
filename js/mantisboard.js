@@ -72,10 +72,6 @@ function initLoadingAnimation() {
     
   });
 
-  $(".gridster ul").gridster({
-    widget_margins: [10, 10],
-    widget_base_dimensions: [150, 150]
-  });
 }
 
 //
@@ -85,9 +81,59 @@ function endInit() {
   // Trigger Mantis stat display !
   $('#grid').trigger('triggerTilesFunctions', []);
 
-  console.log('klak');
   // Hide loading dialog !
   $('#mask').hide();
   $('#loading').hide();
-  console.log($('#mask')[O]);
+}
+
+
+
+
+function writeJSONParameters(variableName) {
+  writeJSON(variableName, window[variableName]);
+}
+
+function writeJSON(variableName, variable) {
+  console.log("writeJSON");
+  // Writing
+  $.ajax({
+      global: false,
+      type: "POST",
+      cache: false,
+      dataType: "json",
+      data: ({
+          action: 'write',
+          file: 'js/parameters.'+variableName,
+          json: variable
+      }),
+      url: 'read_write_json.php'
+  });
+
+  return false;
+}
+
+
+function readJSONParameters(variableName) {
+  console.log("readJSON");
+  // Reading
+  $.ajax({
+    global: false,
+    type: "POST",
+    cache: false,
+    dataType: "json",
+    data: ({
+        action: 'read',
+        file: 'js/parameters.'+variableName,
+    }),
+    url: 'read_write_json.php',
+    success: function(data){
+      window[variableName] = jQuery.parseJSON(data);
+
+      displayTiles();
+
+      initMantisStats();
+    }
+  });
+
+  return false;
 }
