@@ -31,11 +31,9 @@ body {
 
 a {
     color: #aaa;
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: bold;
 }
-
-
 
 
 .gridster {
@@ -72,7 +70,7 @@ a {
 
 
 div .configHeader {
-  width: 800px; 
+  width: 600px; 
   margin: 0 auto;
   padding:5px 10px;
   height:30px;
@@ -86,7 +84,7 @@ div .configHeader {
 
 
 div .configMain {
-  width: 800px; 
+  width: 600px; 
   margin: 0 auto;
   color:#aaa; 
   background-color: #333;  
@@ -100,18 +98,46 @@ div .configMain {
   padding: 5px;
 }
 
+.formConfig  button {
+  background: #CCC; 
+  color: #333; 
+  font-weight: bold;
+  font-size: 1em;
+  padding: 5px 10px;
+  margin: 10px;
+  border: none;
+}
+
+.formConfig  button:hover {
+  background: #aaa; 
+}
+
+.formButton  {
+  background: #CCC; 
+  color: #333; 
+  font-weight: bold;
+  font-size: 1em;
+  padding: 5px 10px;
+  margin: 10px;
+  border: none;
+}
+
+.formButton:hover {
+  background: #aaa; 
+}  
+
 #formConfig label {
   text-align: left;
   display: block;
-  margin: 10px 0 10px 100px;
-  width: 500px;
-}
+  margin: 10px 0 10px 20px;
+/*  width: 500px;
+*/}
 
 #formConfig label input {
   float: right;
-  width:200px;
+  width:300px;
+  margin-right:20px;
 }
-
 
 #formConfigWarning {
   color : #500;
@@ -130,6 +156,14 @@ div #msgConfigSuccess {
   background-color : #8a8;
   font-weight: 500;
   padding: 10px 100px 10px 100px;
+}
+
+div .tileSettings {
+  width: 130px; /* .gs_w.width-20 */
+  margin: 0 auto;
+  display:block;
+  background-color: #333; 
+  display:none; 
 }
 
 div .tileHeader {
@@ -276,17 +310,29 @@ div .weather .currently {
 
 #loading {
   width:375px; 
-  height:203px;
+  height:220px;
   text-align: center;
-  vertical-align: center;
   margin: 0 auto;
-  padding:40px;
   background-color: #2a2a2a;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
   font-size: 2em;
   font-weight: 600;
   color: #aaa;
+}
+
+
+#loading a {
+  background: #CCC; 
+  color: #333; 
+  font-weight: bold;
+  font-size: 1em;
+  padding: 5px 10px;
+  margin: 30px;
+  border: none;
+}
+
+#loading a:hover {
+  background: #aaa; 
 }
 
 #mask {
@@ -296,4 +342,42 @@ div .weather .currently {
   z-index:9000;
   background-color:#000;
   display:none;
+}
+
+#pageslide {
+    /* These styles MUST be included. Do not change. */
+    display: none;
+    position: absolute;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    z-index: 999999;
+    
+    /* Specify the width of your pageslide here */
+    width: 640px;
+    padding: 20px;
+    
+    /* These styles are optional, and describe how the pageslide will look */
+    background-color: #2a2a2a;
+    color: #aaa;
+    -webkit-box-shadow: inset 0 0 5px 5px #222;
+    -moz-shadow: inset 0 0 5px 5px #222;
+    box-shadow: inset 0 0 5px 5px #222;
+}
+
+.settings {
+  font-size: 2em;
+  padding: 10px;
+  float:right;
+}
+.settings_tile {
+  color:#444;
+  font-size: 1.5em;
+  text-shadow:none;
+  margin:-5px -5px 0px 0px;
+  float:right;
+}
+.settings_tile:hover {
+  color:#aaa;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
 }

@@ -350,7 +350,7 @@ function plotRadar(chartCanvas,data) {
 // High level function : plot new radar chart from a struct
 //
 function plotRadarFromListStruct(chartCanvas,listStruct, listColours) {
-  if(typeof listColours === 'undefined')
+  if(typeof listColours == "undefined")
     listColours=mantisboard.chartColors;
 
   var data = setDataRadarFromStruct(listStruct[0],listColours[0]);
@@ -510,7 +510,7 @@ function plotBar(chartCanvas,data) {
 // High level function : plot new bar chart from a struct
 //
 function plotBarFromListStruct(chartCanvas, listStruct, listColours) {  
-  if(typeof listColours === 'undefined')
+  if(typeof listColours == "undefined")
     listColours=mantisboard.chartColors;
 
   var data = setDataBarFromStruct(listStruct[0],listColours[0]);

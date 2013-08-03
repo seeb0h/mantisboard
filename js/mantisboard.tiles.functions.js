@@ -14,7 +14,7 @@ function displayMantisCategories(chartCanvas){
    var dataset={};
   // Count each Categories type
   $.each(MantisJSON, function(i, item) {
-    if(dataset[item.category]==undefined)
+    if(typeof dataset[item.category] == "undefined")
       dataset[item.category]=0;
     dataset[item.category]++;
   });
@@ -32,7 +32,7 @@ function displayMantisCategoriesResolved(chartCanvas){
   // Count each Categories type for resolved issues
   $.each(MantisJSON, function(i, item) {
     if(item.status==statusResolvedID) {
-      if(dataset[item.category]==undefined)
+      if(typeof dataset[item.category] == "undefined")
         dataset[item.category]=0;
       dataset[item.category]++;
     }
@@ -51,11 +51,11 @@ function displayMantisCategoriesBar(chartCanvas, chartColors){
   dataset[0]={};
   dataset[1]={};
   $.each(MantisJSON, function(i, item) {
-    if(dataset[0][item.category]==undefined)
+    if(typeof dataset[0][item.category] == "undefined")
       dataset[0][item.category]=0;
     dataset[0][item.category]++;
     if(item.status==statusResolvedID) {
-      if(dataset[1][item.category]==undefined)
+      if(typeof dataset[1][item.category] == "undefined")
         dataset[1][item.category]=0;
       dataset[1][item.category]++;
     }
@@ -73,7 +73,7 @@ function displayMantisStatus(chartCanvas){
   // Count each Categories type
   $.each(MantisJSON, function(i, item) {
     statusName=getMantisStatusName(item.status)
-    if(dataset[statusName]==undefined)
+    if(typeof dataset[statusName] == "undefined")
       dataset[statusName]=0;
     dataset[statusName]++;
   });

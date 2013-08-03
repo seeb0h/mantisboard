@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/jquery.gridster.min.css">
+  <link rel="stylesheet" type="text/css" href="css/mantisboard.css?0011">
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="js/mantisboard.js?0019" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mantisboard.settings.js?0025" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+  <div class="config" >
+    <div class="configHeader" >
+      Settings
+    </div>
+    <div class="configMain" >
+
+      <form class="formConfig" id="formConfigWarning" action="javascript:writeConfig(window.parent.mantisboard);">
+          <div id="msgConfigWarning">Following input(s) are not filled. Are you sure to proceed ?<ul></ul></div>
+          <input class="formButton" name="commit" value="Validate" type="submit" />
+      </form>
+
+      <div id="msgConfigSuccess"></div>
+
+      <form class="formConfig" id="formConfig" action="javascript:writeConfig(window.parent.mantisboard);" onsubmit="return checkValidation(window.parent.mantisboard);">
+          <label>Mantis URL <input type="text" name="mantis_url" /></label>
+          <label>Mantis Username <input type="text" name="mantis_username" /></label>
+          <label>Mantis Password <input type="password" name="mantis_password" maxlength="40" /></label>
+          <label>Mantis Project Name <input type="text" name="projectName" /></label>
+          <label>Mantis Filter Name <input type="text" name="filterName" /></label>
+          <label>Mantis Issues Limit <input type="text" name="issueLimit" /></label>
+          <label>TISSEO Access Key<input type="text" name="keyTISSEO" /></label>
+          <label>chartColors <input type="text" name="chartColors" /></label>
+          <label>status_newName <input type="text" name="status_newName" /></label>
+          <label>status_feedbackName <input type="text" name="status_feedbackName" /></label>
+          <label>status_acknowledgedName <input type="text" name="status_acknowledgedName" /></label>
+          <label>status_confirmedName <input type="text" name="status_confirmedName" /></label>
+          <label>status_assignedName <input type="text" name="status_assignedName" /></label>
+          <label>status_resolvedName <input type="text" name="status_resolvedName" /></label>
+          <label>status_closedName <input type="text" name="status_closedName" /></label>
+          <input class="formButton" name="commit" value="Validate" type="submit" />
+          <input class="formButton" name="commit" value="Cancel" type="button" onclick="window.parent.$.pageslide.close();return false;" />
+      </form>
+
+
+    </div>
+  </div>
+
+  
+  <script src="js/jquery.pageslide.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    // Init form with mantisboard settings
+	initSettingsForm(window.parent.mantisboard);
+  </script>
+
+</body>
+</html>

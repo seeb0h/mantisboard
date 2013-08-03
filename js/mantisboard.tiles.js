@@ -10,7 +10,11 @@
 //
 // Specific tiles
 //
-function displayHeader(text,i) {return '<div class="tileHeader" id="tileHeader_'+i+'"><p>'+text+'</p></div>'};
+function displaySettings(i) {return '<div class="tileSettings" id="tileSettings_'+i+'">blabla</div>'};
+
+
+
+function displayHeader(text,i) {return '<div class="tileHeader" id="tileHeader_'+i+'"><p>'+text+'<a href="#" onClick="$(tileSettings_'+i+').toggle();$(tileMain_'+i+').toggle();return false;" class="settings_tile"><i class="icon-cog"></i></a></p></div>'};
 function displayMainH1(text,i) {return '<div class="tileMain" id="tileMain_'+i+'"><h1><span>'+text+'</span></h1></div>'};
 function displayMainP(text,i) {return '<div class="tileMain" id="tileMain_'+i+'"><p><span>'+text+'</span></p></div>'};
 function displayMainWeather(weatherID,i) {return '<div class="tileMain" id="tileMain_'+i+'"><div class="weather ready" id='+weatherID+'></div></div>'};
@@ -86,6 +90,8 @@ function setTilesCSS() {
   $.each(JSONtiles, function(i, tile) {
     var gs_w_width=$('#tile_'+i).width();
     var gs_w_height=$('#tile_'+i).height();
+
+    $('#tileSettings_'+i).width(gs_w_width-20);
 
     $('#tileMain_'+i).width(gs_w_width-20);
     
@@ -193,7 +199,7 @@ function displayTiles () {
       tileMainFunction=displayMainFilterName;
     }
 
-    $("#tile_"+i).html(displayHeaderFunction(tile.headerText,i)+tileMainFunction(tile.mainText,i));
+    $("#tile_"+i).html(displayHeaderFunction(tile.headerText,i)+displaySettings(i)+tileMainFunction(tile.mainText,i));
   });
 
   // Step 3 : set the css for centering and colours purpose
@@ -218,7 +224,7 @@ function setTilesFunctions () {
     element = $('#tileMain_'+i+'>canvas');
 
 
-    if(tile.displayFunction!=undefined) {  
+    if( typeof tile.displayFunction != "undefined" ) {  
       // function for charts
       if(element[0]) {
         // console.log('#tileMain_'+i+'>canvas : ' + element[0]);
@@ -247,7 +253,7 @@ function setTriggerTilesFunctions () {
 
       element = $('#tileMain_'+i+'>canvas');
 
-      if(tile.displayFunction!=undefined) {  
+      if( typeof tile.displayFunction != "undefined" ) {  
         // function for charts
         if(element[0]) {
           // console.log('#tileMain_'+i+'>canvas : ' + element[0]);

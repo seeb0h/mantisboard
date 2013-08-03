@@ -7,6 +7,13 @@
  * https://github.com/seeb0h/mantisboard/blob/master/LICENSE.md
  */
 
+// iframe custom selector
+$.extend($.expr[':'], {
+    contents: function(elem, i, attr){
+      return $(elem).contents().find( attr[3] );
+    }
+});  
+ 
 //
 // Call these function before init !!!!
 //
@@ -93,20 +100,27 @@ function writeJSONParameters(variableName) {
   writeJSON(variableName, window[variableName]);
 }
 
-function writeJSON(variableName, variable) {
+function writeJSON(variableName, variable, location2Reload) {
+	  console.log('location2Reload '+location2Reload);
   console.log("writeJSON");
   // Writing
   $.ajax({
-      global: false,
-      type: "POST",
-      cache: false,
-      dataType: "json",
-      data: ({
-          action: 'write',
-          file: 'js/parameters.'+variableName,
-          json: variable
-      }),
-      url: 'read_write_json.php'
+    global: false,
+    type: "POST",
+    cache: false,
+    dataType: "json",
+    data: ({
+      action: 'write',
+      file: 'js/parameters.'+variableName,
+      json: variable
+    }),
+    url: 'read_write_json.php',
+    complete: function(data){
+	  console.log('location2Reload '+location2Reload);
+      if( typeof location2Reload != "undefined" )
+        // Reload given window
+        location2Reload.reload(true);
+    }
   });
 
   return false;
@@ -132,6 +146,8 @@ function readJSONParameters(variableName) {
       displayTiles();
 
       initMantisStats();
+	  
+	  //initSettingsForm();
     }
   });
 

@@ -2,14 +2,15 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="css/jquery.gridster.min.css">
-  <link rel="stylesheet" type="text/css" href="css/mantisboard.css?0011">
+  <link rel="stylesheet" type="text/css" href="css/mantisboard.css?0020">
   <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
   <script src="js/mantisboard.js?0018" type="text/javascript" charset="utf-8"></script>
   <script src="js/mantisboard.tiles.functions.js?0019" type="text/javascript" charset="utf-8"></script>
-  <script src="js/mantisboard.tiles.js?0019" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mantisboard.tiles.js?0020" type="text/javascript" charset="utf-8"></script>
   <script src="js/mantisboard.chart.js?0018" type="text/javascript" charset="utf-8"></script>
   <script src="js/mantisboard.mantis.js?0021" type="text/javascript" charset="utf-8"></script>
 
@@ -22,6 +23,10 @@
 </head>
 <body>
 
+
+<a href="_settings.html" class="settings"><i class="icon-cogs"></i></a>
+
+
 <!-- Mask to cover the whole screen -->
 <div id="mask"></div>
 
@@ -30,6 +35,8 @@
 <div id="loading" class="window">
   Loading data 
   <br/>Please wait
+  <br/>
+  <br/><a href="#" onclick="javascript:endInit();return false;">Cancel</a>
 </div>
 
 <div class="gridster" id="grid">
@@ -43,7 +50,13 @@
 
 
 
+
+
+<script src="js/jquery.pageslide.min.js"></script>
+
 <script type="text/javascript">
+  $(".settings").pageslide({ direction: "left", modal: true });
+
   var grister={};
 
   // Load animation
