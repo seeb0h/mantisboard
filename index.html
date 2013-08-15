@@ -13,6 +13,7 @@
   <script src="js/mantisboard.tiles.js?0020" type="text/javascript" charset="utf-8"></script>
   <script src="js/mantisboard.chart.js?0018" type="text/javascript" charset="utf-8"></script>
   <script src="js/mantisboard.mantis.js?0021" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mantisboard.queue.js?0021" type="text/javascript" charset="utf-8"></script>
 
   <script src="js/mantisboard.parameters.js?0021" type="text/javascript" charset="utf-8"></script> 
 
@@ -71,13 +72,15 @@
 
   });
 
-
-
+  // Init functions queue
+  // The goal is to wait end of each callback before to call next function
+  initFunctionsQueue();
 
   dogetIssueCustomFields=false;
 
   // Read parameters and display tiles
-  readJSONParameters("mantisboard");
+  //readJSONParameters("mantisboard");
+  callNextFunction();
 
 </script>
 

@@ -130,8 +130,7 @@ div .configMain {
   text-align: left;
   display: block;
   margin: 10px 0 10px 20px;
-/*  width: 500px;
-*/}
+}
 
 #formConfig label input {
   float: right;
@@ -380,4 +379,46 @@ div .weather .currently {
 .settings_tile:hover {
   color:#aaa;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+
+.formTileConfig {
+  font-size: 0.75em;
+  text-align: center;
+/*  font-weight: 500;
+*/  margin: 0 auto;
+  padding: 5px;
+}
+
+.formTileConfig  button {
+  background: #CCC; 
+  color: #333; 
+  font-weight: bold;
+  font-size: 1em;
+  padding: 5px 10px;
+  margin: 10px;
+  border: none;
+}
+
+.formTileConfig  button:hover {
+  background: #aaa; 
+}
+
+#formTileConfig label {
+  text-align: left;
+  display: block;
+  margin: 5px 0 5px 5px;
+/*  width: 500px;
+*/}
+
+#formTileConfig label input {
+  float: right;
+/*  width:300px;
+*/  /*margin-right:20px;*/
+}
+
+#formTileConfig label select {
+  float: right;
+/*  width:300px;
+*/  /*margin-right:20px;*/
 }

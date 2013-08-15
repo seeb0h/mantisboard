@@ -7,17 +7,21 @@
  * https://github.com/seeb0h/mantisboard/blob/master/REAME.md
  */
 
+// Will contain Mantis data SOAP output
+MantisJSON={};
+
+
 //
 // Call through getJSON callback() every needed Mantis function
 //
 function initMantisStats() {
-  getMantisEnumStatus();
+  getMantisEnumStatus(false);
 }
 
 //
 // Store Mantis enum status
 //
-function getMantisEnumStatus() {
+function getMantisEnumStatus(doCallNextFunction) {
   var url = 'soap2json.php?service=mantis&name=mc_enum_status';
 
   // Store mantis JSON and trigger display when finished
@@ -30,14 +34,17 @@ function getMantisEnumStatus() {
       console.log('mantisboard.enumStatus : '+mantisboard.enumStatus);
 
       // Next Mantis function
-      getMantisProjectID();
+      if(doCallNextFunction==true)
+        callNextFunction();
+      else
+        getMantisProjectID(false);
     });
 }
 
 //
 // Get project ID associated with project name
 //
-function getMantisProjectID() {
+function getMantisProjectID(doCallNextFunction) {
   var url = 'soap2json.php?service=mantis&name=mc_project_get_id_from_name&project_name='+mantisboard.projectName;
 
   // Store mantis JSON and trigger display when finished
@@ -52,7 +59,10 @@ function getMantisProjectID() {
       console.log('mantisboard.projectID : '+mantisboard.projectID);
 
       // Next Mantis function
-      getMantisFilterID(mantisboard.projectID);
+      if(doCallNextFunction==true)
+        callNextFunction();
+      else
+        getMantisFilterID(mantisboard.projectID, false);
     });
 }
 
@@ -60,7 +70,11 @@ function getMantisProjectID() {
 //
 // Get filter ID associated with filter name
 //
-function getMantisFilterID(projectID) {
+function getMantisFilterID(projectID, doCallNextFunction) {
+  // Defaults parameters
+  if(projectID=="undefined")
+    projectID=mantisboard.projectID;
+
   var url = 'soap2json.php?service=mantis&name=mc_filter_get&project_id='+projectID;
 
   // Store mantis JSON and trigger display when finished
@@ -78,7 +92,10 @@ function getMantisFilterID(projectID) {
           console.log('mantisboard.filterID : '+mantisboard.filterID);
 
           // Next Mantis function
-          getMantisStats(mantisboard.projectID, mantisboard.filterID)
+          if(doCallNextFunction==true)
+            callNextFunction();
+          else
+            getMantisStats(mantisboard.projectID, mantisboard.filterID, false)
         }
           
       });
@@ -88,7 +105,13 @@ function getMantisFilterID(projectID) {
 //
 // Get Mantis stats on selected filter
 //
-function getMantisStats(projectID, filterID) {
+function getMantisStats(projectID, filterID, doCallNextFunction) {
+  // Defaults parameters
+  if(projectID=="undefined")
+    projectID=mantisboard.projectID;
+  if(filterID=="undefined")
+    filterID=mantisboard.filterID;
+
   var url = 'soap2json.php?service=mantis&name=mc_filter_get_issue_headers&project_id='+projectID+'&filter_id='+filterID+'&page_number=1&per_page='+mantisboard.issueLimit;
 
   // Store mantis JSON and trigger display when finished
@@ -112,7 +135,10 @@ function getMantisStats(projectID, filterID) {
         }
       });
 
-      endInit();
+      if(doCallNextFunction==true)
+        callNextFunction();
+      else
+        endInit();
     });
 }
 
@@ -120,7 +146,7 @@ function getMantisStats(projectID, filterID) {
 //
 // Get Mantis custom fields stats on selected issue
 //
-function getIssueCustomFields(issueID, isResolved, isLastIssue) {
+function getIssueCustomFields(issueID, isResolved, isLastIssue, doCallNextFunction) {
   var url = 'soap2json.php?service=mantis&name=mc_issue_get&issue_id='+issueID;
   
   $.getJSON(url) 
@@ -150,7 +176,10 @@ function getIssueCustomFields(issueID, isResolved, isLastIssue) {
   
       if(isLastIssue) {
         console.log(MantisCustomFields);
-        endInit();
+        if(doCallNextFunction==true)
+          callNextFunction();
+        else
+          endInit();
       }
     });
 }

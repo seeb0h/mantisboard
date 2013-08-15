@@ -7,13 +7,7 @@
  * https://github.com/seeb0h/mantisboard/blob/master/LICENSE.md
  */
 
-// iframe custom selector
-$.extend($.expr[':'], {
-    contents: function(elem, i, attr){
-      return $(elem).contents().find( attr[3] );
-    }
-});  
- 
+
 //
 // Call these function before init !!!!
 //
@@ -127,7 +121,7 @@ function writeJSON(variableName, variable, location2Reload) {
 }
 
 
-function readJSONParameters(variableName) {
+function readJSONParameters(variableName, doCallNextFunction) {
   console.log("readJSON");
   // Reading
   $.ajax({
@@ -143,13 +137,14 @@ function readJSONParameters(variableName) {
     success: function(data){
       window[variableName] = jQuery.parseJSON(data);
 
-      displayTiles();
-
-      initMantisStats();
-	  
-	  //initSettingsForm();
+    // Next callback function
+    if(doCallNextFunction==true)
+      callNextFunction();	  
     }
   });
 
   return false;
 }
+
+
+
